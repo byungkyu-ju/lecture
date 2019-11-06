@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/lecture.iml" filepath="$PROJECT_DIR$/lecture.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springbootbasic/springbootbasic.iml" filepath="$PROJECT_DIR$/springbootbasic/springbootbasic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/springbootbasic.main.iml" filepath="$PROJECT_DIR$/.idea/modules/springbootbasic.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/springbootbasic.test.iml" filepath="$PROJECT_DIR$/.idea/modules/springbootbasic.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springbootmvcbasic/springbootmvcbasic.iml" filepath="$PROJECT_DIR$/springbootmvcbasic/springbootmvcbasic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/springbootmvcbasic.main.iml" filepath="$PROJECT_DIR$/.idea/modules/springbootmvcbasic.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/springbootmvcbasic.test.iml" filepath="$PROJECT_DIR$/.idea/modules/springbootmvcbasic.test.iml" />
+    </modules>
+  </component>
+</project>
