@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -9,6 +10,10 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="rest-api-event.main" target="11" />
+      <module name="rest-api-event.test" target="11" />
+      <module name="spring-rest-api-event.main" target="11" />
+      <module name="spring-rest-api-event.test" target="11" />
       <module name="springbootbasic.main" target="11" />
       <module name="springbootbasic.test" target="11" />
       <module name="springbootmvcbasic" target="1.8" />
