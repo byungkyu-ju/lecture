@@ -5,6 +5,7 @@
     <content url="file://$MODULE_DIR$/../../spring-rest-api-event">
       <excludeFolder url="file://$MODULE_DIR$/../../spring-rest-api-event/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/../../spring-rest-api-event/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../spring-rest-api-event/out" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

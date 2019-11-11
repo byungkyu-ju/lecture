@@ -1,7 +1,6 @@
 package me.bk.springrestapievent.events;
 
 import org.junit.jupiter.api.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 class EventTest {
@@ -22,7 +21,6 @@ class EventTest {
 
         assertThat(event.getName()).isEqualTo(name);
         assertThat(event.getDescription()).isEqualTo(description);
-
     }
 
 }
