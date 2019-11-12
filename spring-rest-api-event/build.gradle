@@ -1,3 +1,13 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.9'
+    }
+}
+
 plugins {
     id 'org.springframework.boot' version '2.2.1.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
@@ -38,6 +48,9 @@ dependencies {
     // https://mvnrepository.com/artifact/org.modelmapper/modelmapper
     compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.5'
 
+    // rest assured & asciidoc
+    compile('org.springframework.restdocs:spring-restdocs-restassured')
+    asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor:2.0.1.RELEASE'
 }
 
 test {
@@ -49,3 +62,11 @@ asciidoctor {
     inputs.dir snippetsDir
     dependsOn test
 }
+
+bootJar {
+    dependsOn asciidoctor
+    from ("${asciidoctor.outputDir}/html5") {
+        into 'static'
+    }
+}
+
