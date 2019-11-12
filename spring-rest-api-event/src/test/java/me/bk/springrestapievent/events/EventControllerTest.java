@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -32,10 +33,10 @@ class EventControllerTest {
         EventDto event = EventDto.builder()
                 .name("Spring")
                 .description("description")
-                .beginEnrollmentDateTime(LocalDateTime.of(2019, 11, 11, 9, 0))
-                .closeEnrollmentDateTime(LocalDateTime.of(2019, 11, 11, 18, 0))
-                .beginEventDateTime(LocalDateTime.of(2019, 11, 12, 9, 0))
-                .endEventDateTime(LocalDateTime.of(2019, 11, 12, 18, 0))
+                .beginEnrollmentDateTime(LocalDateTime.of(2019, 11, 10, 9, 0))
+                .closeEnrollmentDateTime(LocalDateTime.of(2019, 11, 10, 18, 0))
+                .beginEventDateTime(LocalDateTime.of(2019, 11, 11, 9, 0))
+                .endEventDateTime(LocalDateTime.of(2019, 11, 11, 18, 0))
                 .basePrice(100)
                 .maxPrice(200)
                 .limitOfEnrollment(100)
@@ -60,16 +61,17 @@ class EventControllerTest {
                 .id(100)
                 .name("Spring")
                 .description("description")
-                .beginEnrollmentDateTime(LocalDateTime.of(2019, 11, 11, 9, 0))
-                .closeEnrollmentDateTime(LocalDateTime.of(2019, 11, 11, 18, 0))
-                .beginEventDateTime(LocalDateTime.of(2019, 11, 12, 9, 0))
-                .endEventDateTime(LocalDateTime.of(2019, 11, 12, 18, 0))
+                .beginEnrollmentDateTime(LocalDateTime.of(2019, 11, 10, 9, 0))
+                .closeEnrollmentDateTime(LocalDateTime.of(2019, 11, 10, 18, 0))
+                .beginEventDateTime(LocalDateTime.of(2019, 11, 11, 9, 0))
+                .endEventDateTime(LocalDateTime.of(2019, 11, 11, 18, 0))
                 .basePrice(100)
                 .maxPrice(200)
                 .limitOfEnrollment(100)
                 .location("강남")
                 .free(true)
                 .offline(false)
+                .eventStatus(EventStatus.PUBLISHED)
                 .build();
 
         mockMvc.perform(post("/api/events/")
@@ -81,12 +83,39 @@ class EventControllerTest {
     }
 
     @Test
-    void createEvent_Bad_Request_Empty_input() throws Exception {
-        EventDto eventDto = EventDto.builder().build();
+    void testFree(){
+        Event event = Event.builder()
+                .basePrice(0)
+                .maxPrice(0)
+                .build();
 
-        this.mockMvc.perform(post("/api/events/")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(this.objectMapper.writeValueAsString(eventDto)))
-                .andExpect(status().isBadRequest());
+        event.update();
+        assertThat(event.isFree()).isTrue();
+
+        event = Event.builder()
+                .basePrice(100)
+                .maxPrice(0)
+                .build();
+
+        event.update();
+        assertThat(event.isFree()).isFalse();
     }
+
+    @Test
+    void testOffline() {
+        Event event = Event.builder()
+                .location("종로3가")
+                .build();
+
+        event.update();
+        assertThat(event.isOffline()).isTrue();
+
+        event = Event.builder()
+                .location("")
+                .build();
+
+        event.update();
+        assertThat(event.isOffline()).isFalse();
+    }
+
 }
