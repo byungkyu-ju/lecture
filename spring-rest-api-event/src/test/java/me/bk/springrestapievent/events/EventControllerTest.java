@@ -3,12 +3,9 @@ package me.bk.springrestapievent.events;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -35,10 +32,10 @@ class EventControllerTest {
         EventDto event = EventDto.builder()
                 .name("Spring")
                 .description("description")
-                .beginEnrollmentDateTime(LocalDateTime.of(2019,11,11,9, 0))
-                .closeEnrollmentDateTime(LocalDateTime.of(2019,11,11,18,0))
-                .beginEventDateTime(LocalDateTime.of(2019,11,12,9,0))
-                .endEventDateTime(LocalDateTime.of(2019,11,12,18,0))
+                .beginEnrollmentDateTime(LocalDateTime.of(2019, 11, 11, 9, 0))
+                .closeEnrollmentDateTime(LocalDateTime.of(2019, 11, 11, 18, 0))
+                .beginEventDateTime(LocalDateTime.of(2019, 11, 12, 9, 0))
+                .endEventDateTime(LocalDateTime.of(2019, 11, 12, 18, 0))
                 .basePrice(100)
                 .maxPrice(200)
                 .limitOfEnrollment(100)
@@ -46,9 +43,9 @@ class EventControllerTest {
                 .build();
 
         mockMvc.perform(post("/api/events/")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .accept(MediaTypes.HAL_JSON)
-                    .content(objectMapper.writeValueAsString(event)))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaTypes.HAL_JSON)
+                .content(objectMapper.writeValueAsString(event)))
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("id").exists())
@@ -63,10 +60,10 @@ class EventControllerTest {
                 .id(100)
                 .name("Spring")
                 .description("description")
-                .beginEnrollmentDateTime(LocalDateTime.of(2019,11,11,9, 0))
-                .closeEnrollmentDateTime(LocalDateTime.of(2019,11,11,18,0))
-                .beginEventDateTime(LocalDateTime.of(2019,11,12,9,0))
-                .endEventDateTime(LocalDateTime.of(2019,11,12,18,0))
+                .beginEnrollmentDateTime(LocalDateTime.of(2019, 11, 11, 9, 0))
+                .closeEnrollmentDateTime(LocalDateTime.of(2019, 11, 11, 18, 0))
+                .beginEventDateTime(LocalDateTime.of(2019, 11, 12, 9, 0))
+                .endEventDateTime(LocalDateTime.of(2019, 11, 12, 18, 0))
                 .basePrice(100)
                 .maxPrice(200)
                 .limitOfEnrollment(100)
@@ -80,6 +77,16 @@ class EventControllerTest {
                 .accept(MediaTypes.HAL_JSON)
                 .content(objectMapper.writeValueAsString(event)))
                 .andDo(print())
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void createEvent_Bad_Request_Empty_input() throws Exception {
+        EventDto eventDto = EventDto.builder().build();
+
+        this.mockMvc.perform(post("/api/events/")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(eventDto)))
                 .andExpect(status().isBadRequest());
     }
 }
