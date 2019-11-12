@@ -5,7 +5,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpHeaders;
@@ -18,7 +20,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest
+@SpringBootTest
+@AutoConfigureMockMvc
 class EventControllerTest {
     @Autowired
     MockMvc mockMvc;
@@ -26,15 +29,13 @@ class EventControllerTest {
     @Autowired
     ObjectMapper objectMapper;
 
-    @MockBean
-    EventRepository eventRepository;
-
     @Test
     @DisplayName("입력값 전달시 JSON 응답으로 201이 나오는지 확인")
     void createEvent() throws Exception {
         Event event = Event.builder()
-                        .name("Spring")
-                        .description("description")
+                .id(100)
+                .name("Spring")
+                .description("description")
                 .beginEnrollmentDateTime(LocalDateTime.of(2019,11,11,9, 0))
                 .closeEnrollmentDateTime(LocalDateTime.of(2019,11,11,18,0))
                 .beginEventDateTime(LocalDateTime.of(2019,11,12,9,0))
@@ -43,9 +44,9 @@ class EventControllerTest {
                 .maxPrice(200)
                 .limitOfEnrollment(100)
                 .location("강남")
+                .free(true)
+                .offline(false)
                 .build();
-        event.setId(10);
-        Mockito.when(eventRepository.save(event)).thenReturn(event);
 
         mockMvc.perform(post("/api/events/")
                     .contentType(MediaType.APPLICATION_JSON)
