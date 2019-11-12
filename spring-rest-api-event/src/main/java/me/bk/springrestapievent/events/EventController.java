@@ -44,7 +44,7 @@ public class EventController {
         URI createdUri = selfLink.toUri();
         EventRepresentationModel eventRepresentationModel = new EventRepresentationModel(event);
         eventRepresentationModel.add(linkTo(EventController.class).withRel("query-events"));
-        eventRepresentationModel.add(selfLink.withSelfRel());
+        //eventRepresentationModel.add(selfLink.withSelfRel());
         eventRepresentationModel.add(selfLink.withRel("update-event"));
         return ResponseEntity.created(createdUri).body(eventRepresentationModel);
     }
