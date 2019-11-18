@@ -8,19 +8,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Description;
 import org.springframework.context.annotation.Import;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.restdocs.headers.HeaderDocumentation.*;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -28,6 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs
+@ActiveProfiles("test")
 @Import(RestDocsConfiguration.class)
 class EventControllerTest {
     @Autowired
@@ -35,6 +40,9 @@ class EventControllerTest {
 
     @Autowired
     ObjectMapper objectMapper;
+
+    @Autowired
+    EventRepository eventRepository;
 
     @Test
     @DisplayName("입력값 전달시 JSON 응답으로 201이 나오는지 확인")
@@ -64,7 +72,6 @@ class EventControllerTest {
                 .andExpect(jsonPath("_links.self").exists())
                 .andExpect(jsonPath("_links.query-events").exists())
                 .andExpect(jsonPath("_links.update-event").exists())
-                .andExpect(jsonPath("_links.index").exists())
                 .andDo(document(
                         "create-event",
                         links(halLinks(),
@@ -179,5 +186,52 @@ class EventControllerTest {
         event.update();
         assertThat(event.isOffline()).isFalse();
     }
+
+    @Test
+    @DisplayName("30개의 이벤트를 10개씩 두번째 페이지 조회하기")
+    void queryEvents() throws Exception {
+        IntStream.range(0, 30).forEach(this::generateEvent);
+
+        this.mockMvc.perform(get("/api/events")
+                .param("page", "1")
+                .param("size", "10")
+                .param("sort", "name,DESC")
+        )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("page").exists())
+                .andExpect(jsonPath("_links.self").exists())
+                .andDo(document("query-events"))
+
+        ;
+    }
+
+    @Test
+    @Description("기존의 이벤트 하나를 조회하기")
+    void getEvent() throws Exception {
+        Event event = this.generateEvent(100);
+        this.mockMvc.perform(get("/api/events/{id}", event.getId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("name").exists())
+                .andExpect(jsonPath("id").exists())
+                .andExpect(jsonPath("_links.self").exists());
+    }
+
+    @Test
+    @Description("없는 이벤트는 조회했을 때 404")
+    void getEvent404() throws Exception {
+        this.mockMvc.perform(get("/api/events/9999453"))
+                .andExpect(status().isNotFound());
+    }
+
+    private Event generateEvent(int index) {
+        Event event = Event.builder()
+                .name("event " + index)
+                .description("test event")
+                .build();
+
+        return this.eventRepository.save(event);
+    }
+
 
 }
