@@ -5,7 +5,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
-import org.springframework.hateoas.*;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.MediaTypes;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -63,9 +66,9 @@ public class EventController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity getEvent(@PathVariable Integer id){
+    public ResponseEntity getEvent(@PathVariable Integer id) {
         Optional<Event> optionalEvent = this.eventRepository.findById(id);
-        if(optionalEvent.isEmpty()){
+        if (optionalEvent.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         Event event = optionalEvent.get();
@@ -78,15 +81,15 @@ public class EventController {
                                       @RequestBody @Valid EventDto eventDto,
                                       Errors errors) {
         Optional<Event> optionalEvent = this.eventRepository.findById(id);
-        if(optionalEvent.isEmpty()){
+        if (optionalEvent.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        if(errors.hasErrors()){
+        if (errors.hasErrors()) {
             return badRequest(errors);
         }
 
         Event existingEvent = optionalEvent.get();
-        this.modelMapper.map(eventDto,existingEvent);
+        this.modelMapper.map(eventDto, existingEvent);
         Event savedEvent = this.eventRepository.save(existingEvent);
 
         EventRepresentationModel eventRepresentationModel = new EventRepresentationModel(savedEvent);

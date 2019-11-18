@@ -41,9 +41,9 @@ public class Event extends RepresentationModel<Event> {
             this.free = false;
         }
 
-        if (this.location == null || this.location.isBlank()){
+        if (this.location == null || this.location.isBlank()) {
             this.offline = false;
-        }else{
+        } else {
             this.offline = true;
         }
     }
