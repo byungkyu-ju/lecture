@@ -72,4 +72,25 @@ public class EventController {
         EventRepresentationModel eventRepresentationModel = new EventRepresentationModel(event);
         return ResponseEntity.ok(eventRepresentationModel);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity updateevent(@PathVariable Integer id,
+                                      @RequestBody @Valid EventDto eventDto,
+                                      Errors errors) {
+        Optional<Event> optionalEvent = this.eventRepository.findById(id);
+        if(optionalEvent.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        if(errors.hasErrors()){
+            return badRequest(errors);
+        }
+
+        Event existingEvent = optionalEvent.get();
+        this.modelMapper.map(eventDto,existingEvent);
+        Event savedEvent = this.eventRepository.save(existingEvent);
+
+        EventRepresentationModel eventRepresentationModel = new EventRepresentationModel(savedEvent);
+        //eventRepresentationModel.add(profile); //프로필링크 추가
+        return ResponseEntity.ok(eventRepresentationModel);
+    }
 }
