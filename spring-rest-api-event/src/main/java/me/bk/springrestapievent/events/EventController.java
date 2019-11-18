@@ -1,5 +1,6 @@
 package me.bk.springrestapievent.events;
 
+import me.bk.springrestapievent.common.ErrorEntityModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
@@ -32,10 +33,11 @@ public class EventController {
     @PostMapping
     public ResponseEntity createEvent(@RequestBody @Valid EventDto eventDto, Errors errors) {
         if (errors.hasErrors()) {
-            return ResponseEntity.badRequest().body(errors);
+            //return ResponseEntity.badRequest().body(errors);
+            return badRequest(errors);
         }
         if (errors.hasErrors()) {
-            return ResponseEntity.badRequest().body(errors);
+            return badRequest(errors);
         }
         Event event = modelMapper.map(eventDto, Event.class);
         event.update();
@@ -47,5 +49,9 @@ public class EventController {
         //eventRepresentationModel.add(selfLink.withSelfRel());
         eventRepresentationModel.add(selfLink.withRel("update-event"));
         return ResponseEntity.created(createdUri).body(eventRepresentationModel);
+    }
+
+    private ResponseEntity badRequest(Errors errors){
+        return ResponseEntity.badRequest().body(new ErrorEntityModel(errors));
     }
 }

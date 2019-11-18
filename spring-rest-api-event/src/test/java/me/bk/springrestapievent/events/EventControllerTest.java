@@ -64,6 +64,7 @@ class EventControllerTest {
                 .andExpect(jsonPath("_links.self").exists())
                 .andExpect(jsonPath("_links.query-events").exists())
                 .andExpect(jsonPath("_links.update-event").exists())
+                .andExpect(jsonPath("_links.index").exists())
                 .andDo(document(
                         "create-event",
                         links(halLinks(),
