@@ -10,9 +10,9 @@ public class JpaMain {
     public static void main(String[] args) {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("hello");
         // 1.기본 트랜잭션
-        //basicTransactionTutorial(entityManagerFactory);
+        basicTransactionTutorial(entityManagerFactory);
         // 2.JPQL
-        jpqlTutorial(entityManagerFactory);
+        //jpqlTutorial(entityManagerFactory);
     }
 
     private static void basicTransactionTutorial(EntityManagerFactory entityManagerFactory) {
@@ -20,21 +20,22 @@ public class JpaMain {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
         try {
-            /*
+
             // insert
             Member member = new Member();
-            member.setId(2L);
-            member.setName("HelloB");
+            //member.setId("A");
+            member.setUsername("HelloB");
             entityManager.persist(member);
             entityTransaction.commit();
-            */
+            /*
             //update
             Member findMember = entityManager.find(Member.class, 1L);
-            findMember.setName("HelloJPA");
+            findMember.setUsername("HelloJPA");
             entityTransaction.commit();
             //delete
             entityManager.remove(findMember);
             entityTransaction.commit();
+            */
         } catch (Exception e) {
             entityTransaction.rollback();
         } finally {
@@ -53,7 +54,7 @@ public class JpaMain {
                     .setMaxResults(100)
                     .getResultList();
             for (Member member : result){
-                System.out.println("member.name = " + member.getName());
+                System.out.println("member.name = " + member.getUsername());
             }
             entityTransaction.commit();
         } catch (Exception e) {
