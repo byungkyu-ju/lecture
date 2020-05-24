@@ -14,7 +14,7 @@ public class MemberProduct {
     private Member member;
 
     @ManyToOne
-    @JoinColumn(name = "MEMBER_ID")
+    @JoinColumn(name = "PRODUCT_ID")
     private Product product;
 
     private int count;
