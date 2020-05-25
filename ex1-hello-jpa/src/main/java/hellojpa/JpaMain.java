@@ -13,11 +13,20 @@ public class JpaMain {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
         try {
-            Member member = new Member();
-            member.setName("bk");
-            member.setCreatedBy("ju");
-            member.setCreatedDate(LocalDateTime.now());
-            entityManager.persist(member);
+            Member member1 = new Member();
+            member1.setName("mem1");
+
+            Member member2 = new Member();
+            member2.setName("mem2");
+            entityManager.flush();
+            entityManager.clear();
+
+            Member m1 = entityManager.find(Member.class,member1.getId());
+            Member m2 = entityManager.getReference(Member.class,member2.getId());
+
+            System.out.println(m1.getClass());
+            System.out.println(m2.getClass());
+
             entityTransaction.commit();
         } catch (Exception e) {
             entityTransaction.rollback();
