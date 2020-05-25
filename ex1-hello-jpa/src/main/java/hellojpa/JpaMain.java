@@ -12,20 +12,14 @@ public class JpaMain {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
         try {
-            Team team = new Team();
-            team.setName("teamA");
-            entityManager.persist(team);
+            Child child1 = new Child();
+            Child child2 = new Child();
 
-            Member member = new Member();
-            member.setName("mem1");
-            member.setTeam(team);
-            entityManager.persist(member);
+            Parent parent = new Parent();
+            parent.addChild(child1);
+            parent.addChild(child2);
 
-            entityManager.flush();
-            entityManager.clear();
-
-            Member findMember = entityManager.find(Member.class, member.getId());
-            System.out.println("findMember : " + findMember.getTeam().getClass());
+            entityManager.persist(parent);
 
             entityTransaction.commit();
         } catch (Exception e) {
