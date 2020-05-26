@@ -12,14 +12,11 @@ public class JpaMain {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
         try {
-            Child child1 = new Child();
-            Child child2 = new Child();
+            Member member = new Member();
+            member.setName("name");
+            member.setHomeAddress(new Address("city", "street", "zipcode"));
 
-            Parent parent = new Parent();
-            parent.addChild(child1);
-            parent.addChild(child2);
-
-            entityManager.persist(parent);
+            entityManager.persist(member);
 
             entityTransaction.commit();
         } catch (Exception e) {
