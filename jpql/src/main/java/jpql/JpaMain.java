@@ -1,6 +1,7 @@
 package jpql;
 
 import javax.persistence.*;
+import java.util.List;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -9,13 +10,23 @@ public class JpaMain {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
         try {
+            Team team = new Team();
+            team.setName("teamA");
+            entityManager.persist(team);
+
             Member member = new Member();
             member.setUsername("myName");
-            entityManager.persist(member);
+            member.setAge(10);
+            member.setTeam(team);
 
-            TypedQuery<String> query1 = entityManager.createQuery("select m.username from Member m where m.username = :username", String.class);
-            query1.setParameter("username", "myName");
-            Query query2 = entityManager.createQuery("select m.username from Member m");
+            entityManager.persist(member);
+            entityManager.flush();
+            entityManager.clear();
+
+            String query = "select m from Member m inner join m.team t";
+            List<Member> result = entityManager.createQuery(query, Member.class)
+                    .getResultList();
+
             entityTransaction.commit();
         } catch (Exception e) {
             entityTransaction.rollback();
