@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/jpastore
+    url: jdbc:h2:tcp://localhost/~/h2/bin/jpastore
     username: sa
     password: sa
     driver-class-name: org.h2.Driver
