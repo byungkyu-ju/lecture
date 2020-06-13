@@ -1,6 +1,6 @@
 package jpabook.jpastore.domain.exception.NotEnoughStockException;
 
-public class NotEnoughStockException extends RuntimeException{
+public class NotEnoughStockException extends RuntimeException {
     public NotEnoughStockException() {
         super();
     }

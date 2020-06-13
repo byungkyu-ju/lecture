@@ -1,7 +1,6 @@
 package jpabook.jpastore.domain.item;
 
 import jpabook.jpastore.domain.exception.NotEnoughStockException.NotEnoughStockException;
-import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -2,7 +2,6 @@ package jpabook.jpastore.service;
 
 import jpabook.jpastore.domain.Member;
 import jpabook.jpastore.repository.MemberRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +36,7 @@ public class MemberService {
 
     //회원가입
     @Transactional
-    public Long join(Member member){
+    public Long join(Member member) {
         validateDuplicateMember(member);
         memberRepository.save(member);
         return member.getId();
@@ -45,7 +44,7 @@ public class MemberService {
 
     private void validateDuplicateMember(Member member) {
         List<Member> findMembers = memberRepository.findByName(member.getName());
-        if( !findMembers.isEmpty()){
+        if (!findMembers.isEmpty()) {
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
     }
@@ -57,7 +56,7 @@ public class MemberService {
     }
 
     @Transactional(readOnly = true)
-    public Member findOne(Long memberId){
+    public Member findOne(Long memberId) {
         return memberRepository.findOne(memberId);
     }
 }
