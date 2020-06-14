@@ -2,10 +2,12 @@
   <library name="Gradle: org.springframework.boot:spring-boot-starter-json:2.2.0.RELEASE">
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-json/2.2.0.RELEASE/72459189c5a602f1e651c8e2a4547889dc691139/spring-boot-starter-json-2.2.0.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../code/modern-java-in-action/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-json/2.2.0.RELEASE/72459189c5a602f1e651c8e2a4547889dc691139/spring-boot-starter-json-2.2.0.RELEASE.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-json/2.2.0.RELEASE/c7368357f5f89823408517886ab66873624672d9/spring-boot-starter-json-2.2.0.RELEASE-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../code/modern-java-in-action/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-json/2.2.0.RELEASE/c7368357f5f89823408517886ab66873624672d9/spring-boot-starter-json-2.2.0.RELEASE-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

@@ -2,16 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/ex1-hello-jpa/ex1-hello-jpa.iml" filepath="$PROJECT_DIR$/ex1-hello-jpa/ex1-hello-jpa.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jpashop/jpashop.iml" filepath="$PROJECT_DIR$/jpashop/jpashop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jpql/jpql.iml" filepath="$PROJECT_DIR$/jpql/jpql.iml" />
       <module fileurl="file://$PROJECT_DIR$/lecture.iml" filepath="$PROJECT_DIR$/lecture.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spring-rest-api-event.iml" filepath="$PROJECT_DIR$/.idea/modules/spring-rest-api-event.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spring-rest-api-event.main.iml" filepath="$PROJECT_DIR$/.idea/modules/spring-rest-api-event.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spring-rest-api-event.test.iml" filepath="$PROJECT_DIR$/.idea/modules/spring-rest-api-event.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/springbootbasic/springbootbasic.iml" filepath="$PROJECT_DIR$/springbootbasic/springbootbasic.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/springbootbasic.main.iml" filepath="$PROJECT_DIR$/.idea/modules/springbootbasic.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/springbootbasic.test.iml" filepath="$PROJECT_DIR$/.idea/modules/springbootbasic.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/springbootmvcbasic/springbootmvcbasic.iml" filepath="$PROJECT_DIR$/springbootmvcbasic/springbootmvcbasic.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/springbootmvcbasic.main.iml" filepath="$PROJECT_DIR$/.idea/modules/springbootmvcbasic.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/springbootmvcbasic.test.iml" filepath="$PROJECT_DIR$/.idea/modules/springbootmvcbasic.test.iml" />
     </modules>
   </component>
 </project>

@@ -3,22 +3,24 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
-      <profile name="Maven default annotation processors profile" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+      <profile name="Gradle Imported" enabled="true">
         <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$PROJECT_DIR$/../code/modern-java-in-action/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.12/48e4e5d60309ebd833bc528dcf77668eab3cd72c/lombok-1.18.12.jar" />
+        </processorPath>
+        <module name="jpastore.main" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="rest-api-event.main" target="11" />
-      <module name="rest-api-event.test" target="11" />
-      <module name="spring-rest-api-event.main" target="11" />
-      <module name="spring-rest-api-event.test" target="11" />
+      <module name="ex1-hello-jpa" target="8" />
+      <module name="jpashop" target="8" />
+      <module name="jpql" target="8" />
+      <module name="me.bk.spring-rest-api-event.main" target="11" />
+      <module name="me.bk.spring-rest-api-event.test" target="11" />
+      <module name="me.bk.springbootbasic.main" target="11" />
+      <module name="me.bk.springbootbasic.test" target="11" />
       <module name="springbootbasic.main" target="11" />
       <module name="springbootbasic.test" target="11" />
-      <module name="springbootmvcbasic" target="1.8" />
-      <module name="springbootmvcbasic.main" target="11" />
-      <module name="springbootmvcbasic.test" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

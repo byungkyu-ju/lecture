@@ -7,6 +7,19 @@
         <option name="delegatedBuild" value="false" />
         <option name="testRunner" value="PLATFORM" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/jpastore" />
+        <option name="gradleJvm" value="12" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/jpastore" />
+          </set>
+        </option>
+        <option name="useQualifiedModuleNames" value="true" />
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="delegatedBuild" value="false" />
+        <option name="testRunner" value="PLATFORM" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/spring-rest-api-event" />
         <option name="gradleJvm" value="12" />
         <option name="modules">
@@ -14,7 +27,6 @@
             <option value="$PROJECT_DIR$/spring-rest-api-event" />
           </set>
         </option>
-        <option name="useAutoImport" value="true" />
         <option name="useQualifiedModuleNames" value="true" />
       </GradleProjectSettings>
       <GradleProjectSettings>
@@ -28,7 +40,6 @@
             <option value="$PROJECT_DIR$/springbootbasic" />
           </set>
         </option>
-        <option name="useAutoImport" value="true" />
         <option name="useQualifiedModuleNames" value="true" />
       </GradleProjectSettings>
       <GradleProjectSettings>
@@ -42,7 +53,6 @@
             <option value="$PROJECT_DIR$/springbootmvcbasic" />
           </set>
         </option>
-        <option name="useAutoImport" value="true" />
         <option name="useQualifiedModuleNames" value="true" />
       </GradleProjectSettings>
     </option>

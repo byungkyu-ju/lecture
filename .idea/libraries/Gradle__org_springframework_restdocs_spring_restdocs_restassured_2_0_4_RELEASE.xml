@@ -2,10 +2,12 @@
   <library name="Gradle: org.springframework.restdocs:spring-restdocs-restassured:2.0.4.RELEASE">
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.restdocs/spring-restdocs-restassured/2.0.4.RELEASE/f82149503776be711d7871cb72ba1f4146562aef/spring-restdocs-restassured-2.0.4.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../code/modern-java-in-action/caches/modules-2/files-2.1/org.springframework.restdocs/spring-restdocs-restassured/2.0.4.RELEASE/f82149503776be711d7871cb72ba1f4146562aef/spring-restdocs-restassured-2.0.4.RELEASE.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.restdocs/spring-restdocs-restassured/2.0.4.RELEASE/c87967b8ec6617592f5fbd2a45636fc85c0d139b/spring-restdocs-restassured-2.0.4.RELEASE-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../code/modern-java-in-action/caches/modules-2/files-2.1/org.springframework.restdocs/spring-restdocs-restassured/2.0.4.RELEASE/c87967b8ec6617592f5fbd2a45636fc85c0d139b/spring-restdocs-restassured-2.0.4.RELEASE-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
