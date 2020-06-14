@@ -4,7 +4,6 @@ import jpabook.jpastore.domain.item.Book;
 import jpabook.jpastore.domain.item.Item;
 import jpabook.jpastore.service.ItemService;
 import lombok.RequiredArgsConstructor;
-import org.dom4j.rule.Mode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,13 +20,13 @@ public class ItemController {
     private final ItemService itemService;
 
     @GetMapping("/items/new")
-    public String createForm(Model model){
-        model.addAttribute("form",new BookForm());
+    public String createForm(Model model) {
+        model.addAttribute("form", new BookForm());
         return "items/createItemForm";
     }
 
     @PostMapping("/items/new")
-    public String create(BookForm form){
+    public String create(BookForm form) {
         Book book = new Book();
         book.setName(form.getName());
         book.setPrice(form.getPrice());
@@ -40,15 +39,15 @@ public class ItemController {
     }
 
     @GetMapping("/items")
-    public String list(Model model){
+    public String list(Model model) {
         List<Item> items = itemService.findItems();
         model.addAttribute("items", items);
         return "items/itemList";
     }
 
     @GetMapping("items/{itemId}/edit")
-    public String updateItemForm(@PathVariable("itemId") Long itemId, Model model){
-        Book item = (Book)itemService.findOne(itemId);
+    public String updateItemForm(@PathVariable("itemId") Long itemId, Model model) {
+        Book item = (Book) itemService.findOne(itemId);
 
         BookForm form = new BookForm();
         form.setId(item.getId());
@@ -64,17 +63,17 @@ public class ItemController {
     }
 
     @PostMapping(value = "/items/{itemId}/edit")
-    public String updateItem(@ModelAttribute("form") BookForm form) {
-        Book book = new Book();
+    public String updateItem(@PathVariable Long itemId, @ModelAttribute("form") BookForm form) {
+        /*Book book = new Book();
         book.setId(form.getId());
         book.setName(form.getName());
         book.setPrice(form.getPrice());
         book.setStockQuantity(form.getStockQuantity());
         book.setAuthor(form.getAuthor());
         book.setIsbn(form.getIsbn());
-
         itemService.saveItem(book);
-
+*/
+        itemService.updateItem(itemId, form.getName(), form.getPrice(), form.getStockQuantity());
         return "redirect:/items";
     }
 }
