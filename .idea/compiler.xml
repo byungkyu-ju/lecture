@@ -19,8 +19,6 @@
       <module name="me.bk.spring-rest-api-event.test" target="11" />
       <module name="me.bk.springbootbasic.main" target="11" />
       <module name="me.bk.springbootbasic.test" target="11" />
-      <module name="springbootbasic.main" target="11" />
-      <module name="springbootbasic.test" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
