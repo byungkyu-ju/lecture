@@ -26,6 +26,7 @@ public class InitDb {
     static class InitService {
 
         private final EntityManager em;
+
         public void dbInit1() {
 
             Member member = createMember("서울", "1", "1111", "111");
