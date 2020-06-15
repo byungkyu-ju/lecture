@@ -4,7 +4,7 @@ import jpabook.jpastore.domain.Address;
 import jpabook.jpastore.domain.Member;
 import jpabook.jpastore.domain.Order;
 import jpabook.jpastore.domain.OrderStatus;
-import jpabook.jpastore.domain.exception.NotEnoughStockException.NotEnoughStockException;
+import jpabook.jpastore.exception.NotEnoughStockException.NotEnoughStockException;
 import jpabook.jpastore.domain.item.Book;
 import jpabook.jpastore.domain.item.Item;
 import jpabook.jpastore.repository.OrderRepository;
