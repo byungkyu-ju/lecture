@@ -70,7 +70,7 @@ class MemberJpaRepositoryTest {
         Member member2 = new Member("aaa", 20);
         Member member3 = new Member("aaa", 10);
         Member member4 = new Member("aaa", 20);
-        Member member5= new Member("aaa", 10);
+        Member member5 = new Member("aaa", 10);
         Member member6 = new Member("aaa", 20);
 
         memberJpaRepository.save(member1);

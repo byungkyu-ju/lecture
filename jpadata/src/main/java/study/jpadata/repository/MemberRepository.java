@@ -13,7 +13,7 @@ import study.jpadata.entity.Member;
 import java.util.List;
 import java.util.Optional;
 
-public interface MemberRepository extends JpaRepository<Member, Long> , MemberRepositoryCustom {
+public interface MemberRepository extends JpaRepository<Member, Long>, MemberRepositoryCustom {
 
     List<Member> findByUsernameAndAgeGreaterThan(String username, int age);
 
@@ -34,7 +34,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> , MemberRe
 
     //Page<Member> findByAge(int age, Pageable pageable);
 
-    @Query(value ="select m from Member m left join m.team t",
+    @Query(value = "select m from Member m left join m.team t",
             countQuery = "select count(m.username) from Member m")
     Page<Member> findByAge(int age, Pageable pageable);
 
