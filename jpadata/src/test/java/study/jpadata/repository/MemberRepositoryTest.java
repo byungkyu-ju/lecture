@@ -9,6 +9,7 @@ import study.jpadata.entity.Team;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -102,6 +103,17 @@ class MemberRepositoryTest {
         for (Member member : result){
             System.out.println(member.getUsername());
         }
+    }
+
+    @Test
+    void returnType(){
+        Member member1 = new Member("aaa", 10);
+        Member member2 = new Member("aaa", 20);
+        memberRepository.save(member1);
+        memberRepository.save(member2);
+
+        Optional<Member> findMembers = memberRepository.findOptionalByUsername("aaa");
+
     }
 
 }
