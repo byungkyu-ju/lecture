@@ -3,6 +3,11 @@ package study.jpadata.repository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Query;
 import study.jpadata.dto.MemberDto;
 import study.jpadata.entity.Member;
 import study.jpadata.entity.Team;
@@ -115,5 +120,42 @@ class MemberRepositoryTest {
         Optional<Member> findMembers = memberRepository.findOptionalByUsername("aaa");
 
     }
+
+    @Test
+    void paging() {
+        Member member1 = new Member("aaa", 10);
+        Member member2 = new Member("aaa", 20);
+        Member member3 = new Member("aaa", 10);
+        Member member4 = new Member("aaa", 20);
+        Member member5= new Member("aaa", 10);
+        Member member6 = new Member("aaa", 20);
+
+        memberRepository.save(member1);
+        memberRepository.save(member2);
+        memberRepository.save(member3);
+        memberRepository.save(member4);
+        memberRepository.save(member5);
+        memberRepository.save(member6);
+
+        int age = 10;
+        PageRequest pageRequest = PageRequest.of(0, 3, Sort.Direction.DESC, "username");
+
+        Page<Member> page = memberRepository.findByAge(age, pageRequest);
+
+        List<Member> content = page.getContent();
+        long totalElements = page.getTotalElements();
+
+        for (Member member : content) {
+            System.out.println("member = " + member);
+        }
+        System.out.println("totalElements = " + totalElements);
+
+        assertThat(content.size()).isEqualTo(3);
+        assertThat(page.getTotalElements()).isEqualTo(3);
+        assertThat(page.getNumber()).isEqualTo(0);
+        assertThat(page.isFirst()).isTrue();
+        assertThat(page.hasNext()).isFalse();
+    }
+
 
 }
