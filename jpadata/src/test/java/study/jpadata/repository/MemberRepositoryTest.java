@@ -5,9 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.Query;
 import study.jpadata.dto.MemberDto;
 import study.jpadata.entity.Member;
 import study.jpadata.entity.Team;
@@ -28,7 +26,7 @@ class MemberRepositoryTest {
     @Autowired
     TeamRepository teamRepository;
     @PersistenceContext
-    EntityManager em;
+    private EntityManager em;
 
     @Test
     void testMember() {
@@ -94,7 +92,7 @@ class MemberRepositoryTest {
         member1.setTeam(team);
 
         List<MemberDto> result = memberRepository.findMemberDto();
-        for (MemberDto dto : result){
+        for (MemberDto dto : result) {
             System.out.println(dto.getUsername());
         }
     }
@@ -108,14 +106,14 @@ class MemberRepositoryTest {
         memberRepository.save(member1);
         member1.setTeam(team);
 
-        List<Member> result = memberRepository.findByNames(Arrays.asList("aaa","bbb"));
-        for (Member member : result){
+        List<Member> result = memberRepository.findByNames(Arrays.asList("aaa", "bbb"));
+        for (Member member : result) {
             System.out.println(member.getUsername());
         }
     }
 
     @Test
-    void returnType(){
+    void returnType() {
         Member member1 = new Member("aaa", 10);
         Member member2 = new Member("aaa", 20);
         memberRepository.save(member1);
@@ -131,7 +129,7 @@ class MemberRepositoryTest {
         Member member2 = new Member("aaa", 20);
         Member member3 = new Member("aaa", 10);
         Member member4 = new Member("aaa", 20);
-        Member member5= new Member("aaa", 10);
+        Member member5 = new Member("aaa", 10);
         Member member6 = new Member("aaa", 20);
 
         memberRepository.save(member1);
@@ -162,17 +160,23 @@ class MemberRepositoryTest {
     }
 
     @Test
-    public void bulkUpdate() {
-        memberRepository.save(new Member("member1", 10));
-        memberRepository.save(new Member("member2", 19));
-        memberRepository.save(new Member("member3", 20));
-        memberRepository.save(new Member("member4", 21));
-        memberRepository.save(new Member("member5", 40));
+    void findMemberlazy() {
+        Team teamA = new Team("teamA");
+        Team teamB = new Team("teamB");
 
-        int resultCount = memberRepository.bulkAgePlus(20);
+        teamRepository.save(teamA);
+        teamRepository.save(teamB);
+        Member member1 = memberRepository.save(new Member("member1", 10, teamA));
+        Member member2 = memberRepository.save(new Member("member2", 10, teamB));
 
-        assertThat(resultCount).isEqualTo(3);
+        memberRepository.save(member1);
+        memberRepository.save(member2);
 
+        List<Member> members = memberRepository.findEntityGraphByUsername("member1");
+
+        for (Member member : members) {
+            System.out.println("member = " + member.getUsername());
+        }
     }
 
 }
