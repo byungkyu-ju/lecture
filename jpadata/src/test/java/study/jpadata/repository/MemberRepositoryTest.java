@@ -7,6 +7,7 @@ import study.jpadata.dto.MemberDto;
 import study.jpadata.entity.Member;
 import study.jpadata.entity.Team;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -85,6 +86,21 @@ class MemberRepositoryTest {
         List<MemberDto> result = memberRepository.findMemberDto();
         for (MemberDto dto : result){
             System.out.println(dto.getUsername());
+        }
+    }
+
+    @Test
+    void findByNames() {
+        Team team = new Team("teamA");
+        teamRepository.save(team);
+
+        Member member1 = new Member("aaa", 10);
+        memberRepository.save(member1);
+        member1.setTeam(team);
+
+        List<Member> result = memberRepository.findByNames(Arrays.asList("aaa","bbb"));
+        for (Member member : result){
+            System.out.println(member.getUsername());
         }
     }
 
