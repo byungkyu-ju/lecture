@@ -3,7 +3,9 @@ package study.jpadata.repository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import study.jpadata.dto.MemberDto;
 import study.jpadata.entity.Member;
+import study.jpadata.entity.Team;
 
 import java.util.List;
 
@@ -14,6 +16,8 @@ class MemberRepositoryTest {
 
     @Autowired
     MemberRepository memberRepository;
+    @Autowired
+    TeamRepository teamRepository;
 
     @Test
     void testMember() {
@@ -67,6 +71,21 @@ class MemberRepositoryTest {
 
         List<Member> result = memberRepository.findUser("aaa", 10);
         assertThat(result.get(0).getAge()).isEqualTo(member1.getAge());
+    }
+
+    @Test
+    void testMemberDto() {
+        Team team = new Team("teamA");
+        teamRepository.save(team);
+
+        Member member1 = new Member("aaa", 10);
+        memberRepository.save(member1);
+        member1.setTeam(team);
+
+        List<MemberDto> result = memberRepository.findMemberDto();
+        for (MemberDto dto : result){
+            System.out.println(dto.getUsername());
+        }
     }
 
 }
