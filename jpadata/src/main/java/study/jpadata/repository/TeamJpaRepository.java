@@ -1,7 +1,6 @@
 package study.jpadata.repository;
 
 import org.springframework.stereotype.Repository;
-import study.jpadata.entity.Member;
 import study.jpadata.entity.Team;
 
 import javax.persistence.EntityManager;

@@ -7,10 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -45,7 +42,7 @@ class MemberTest {
         List<Member> members = em.createQuery("select m from Member m", Member.class)
                 .getResultList();
 
-        for (Member member : members){
+        for (Member member : members) {
             System.out.println("member = " + member);
             System.out.println("-> member.team = " + member.getTeam());
         }

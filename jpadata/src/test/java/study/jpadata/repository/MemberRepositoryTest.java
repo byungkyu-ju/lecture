@@ -1,16 +1,13 @@
 package study.jpadata.repository;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import study.jpadata.entity.Member;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class MemberRepositoryTest {
@@ -48,4 +45,16 @@ class MemberRepositoryTest {
         assertThat(deletedCount).isEqualTo(0);
     }
 
+    @Test
+    void findByUsernameAndAgeGreaterThen() {
+        Member member1 = new Member("aaa", 10);
+        Member member2 = new Member("aaa", 20);
+        memberRepository.save(member1);
+        memberRepository.save(member2);
+
+        List<Member> result = memberRepository.findByUsernameAndAgeGreaterThan("aaa", 15);
+        assertThat(result.get(0).getUsername()).isEqualTo("aaa");
+        assertThat(result.get(0).getAge()).isEqualTo(20);
+        assertThat(result.size()).isEqualTo(1);
+    }
 }
