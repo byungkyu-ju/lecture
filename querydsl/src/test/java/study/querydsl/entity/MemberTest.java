@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import study.querydsl.dto.MemberSearchCondition;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -46,4 +47,5 @@ class MemberTest {
             System.out.println("-> member.team = " + member.getTeam());
         }
     }
+
 }

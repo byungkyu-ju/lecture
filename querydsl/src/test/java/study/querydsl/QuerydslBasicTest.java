@@ -703,7 +703,6 @@ public class QuerydslBasicTest {
                 .from(member)
                 .where(member.username.eq(Expressions.stringTemplate("function('lower', {0})", member.username)))
                 .fetch();
-
     }
 
 }
